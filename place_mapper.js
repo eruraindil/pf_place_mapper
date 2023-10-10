@@ -14,8 +14,13 @@ Promise.all([
         center: new L.LatLng(59.400, -95.933),
         zoom: 4
     });
-    var layer = new L.StamenTileLayer("toner");
-    map.addLayer(layer);
+    // var layer = new L.StamenTileLayer("toner");
+    // map.addLayer(layer);
+    // var layer = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
+    L.maplibreGL({
+        style: 'https://tiles.stadiamaps.com/styles/stamen_toner.json',
+        attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/about" target="_blank">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
     for (let i = 0; i < cities.length; i++) {
         let city = cities[i];
