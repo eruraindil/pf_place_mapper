@@ -4,14 +4,24 @@ Promise.all([
     d3.json(file_cities)
 ]).then(function(data) {
 
-    const cities = data[0].filter((city => city.country == "CA"));
+    const cities = data[0].filter((city => city.country == country));
     let pins = [];
     let clickPin;
     let clickPath;
 
+    const avgLat = cities.reduce(
+        (accumulator, currentValue) => +accumulator + +currentValue.lat,
+        0
+    ) / cities.length;
+
+    const avgLng = cities.reduce(
+        (accumulator, currentValue) => +accumulator + +currentValue.lng,
+        0
+    ) / cities.length;
+
     // replace "toner" here with "terrain" or "watercolor"
     var map = new L.Map("map", {
-        center: new L.LatLng(59.400, -95.933),
+        center: new L.LatLng(avgLat, avgLng),
         zoom: 4
     });
     // var layer = new L.StamenTileLayer("toner");
